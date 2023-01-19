@@ -1,0 +1,127 @@
+﻿@model TaskPearGroup.ViewModel.ProductVm
+@{
+    ViewData["Title"] = "GetAllProducts";
+    SelectList list1 = new SelectList(ViewBag.AppSuppliers, "SupplierId", "SupplierName");
+}
+<section id="addnewProduct">
+  <div class="form-control bg-primary" id="divadd">
+      <form method="post">
+         <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">ProductName</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter Product Name" asp-for="ProductName">
+             <span asp-validation-for="ProductName" class="text-danger"></span>
+             </div>
+              <div class="col-sm-6 form-group ">
+            <label for="name-f">QauantityPerUnit</label>
+            <input type="number" class="form-control"   id="txt_name" placeholder="Enter QauantityPerUnit." asp-for="QauantityPerUnit">
+             <span asp-validation-for="QauantityPerUnit" class="text-danger"></span>
+             </div>
+        </div>
+          <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">ReorderLevel</label>
+            <input type="number" class="form-control"   id="txt_name" placeholder="Enter ReorderLevel." asp-for="ReorderLevel">
+             <span asp-validation-for="ReorderLevel" class="text-danger"></span>
+             </div>
+              <div class="col-sm-6 form-group ">
+            <label for="name-f">UnitPrice</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter Price." asp-for="UnitPrice">
+             <span asp-validation-for="UnitPrice" class="text-danger"></span>
+             </div>
+        </div>
+           <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">UnitsInStock</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter UnitsInStock." asp-for="UnitsInStock">
+             <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+             </div>
+              <div class="col-sm-6 form-group ">
+            <label for="name-f">UnitsOnOrder</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter UnitsOnOrder." asp-for="UnitsOnOrder">
+             <span asp-validation-for="UnitsOnOrder" class="text-danger"></span>
+             </div>
+        </div>
+         <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label>Supplier Name</label>
+          <div class="col-sm-6">
+               <select name="SupplierId" asp-items="list1">
+               <option value="0">--Select Supplier--</option>
+                    </select>
+          </div>
+             <span asp-validation-for="SupplierId" class="text-danger"></span>
+             </div>
+            <div class="col-sm-6 form-group ">
+               <button id="btn-add"  asp-action="AddNewProduct" type="submit" class="btn btn-light offset-5 mt-4 mb-3">
+                Add Product
+            </button>
+             </div>
+        </div>
+        
+     </form>
+  </div>
+  </section>
+ <br />
+<section class="bg-primary">
+     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet"/>
+           <div class="row m-1" >
+          <div class="col-md-12" style="margin-top:15px ;">
+            <table class="display table bg-white col-md-12"id="tablepro">
+                <thead>
+                    <tr>
+                     <td class="col-1">ProductId</td>
+                     <td class="col-2">ProductName</td>
+                     <td class="col-1">QauantityPerUnit</td>      
+                     <td class="col-1">ReorderLevel</td>      
+                     <td class="col-1">UnitPrice</td>      
+                     <td class="col-1">UnitsInStock</td>      
+                     <td class="col-1">UnitsOnOrder</td>      
+                     <td class="col-1">SupplierId</td>      
+                     <td class="col-3"></td>                    
+
+                    </tr>
+                </thead>
+                <tbody id="tabody">
+                    @foreach (var item in ViewBag.AllProducts)
+                    {
+                                <tr>
+                             <td class="col-1">@item.ProductId</td>
+                             <td class="col-2">@item.ProductName</td>
+                             <td class="col-1">@item.QauantityPerUnit</td>      
+                             <td class="col-1">@item.ReorderLevel</td>      
+                             <td class="col-1">@item.UnitPrice</td>      
+                             <td class="col-1">@item.UnitsInStock</td>      
+                             <td class="col-1">@item.UnitsOnOrder</td>      
+                             <td class="col-1">@item.SupplierId</td>                                  
+                                 <td class="col-3">
+
+                                @Html.ActionLink("Edite", "EditeProduct", new {Id=item.ProductId},new{@class="btn btn-primary"})|
+
+                                             <a class="btn btn-danger" asp-controller="Products"  asp-action="DeleteSupplier" asp-route-Id="@item.ProductId"  onclick="return confirm('Are you sur delete @item.ProductName')">Delete</a>
+                                 </td>
+                                </tr>
+                    }
+                </tbody>
+            </table>
+          </div>
+        </div>
+</section>
+@section Scripts{
+                              <script src="~/lib/jquery/dist/jquery.js"></script>
+                              <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+                             <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+                            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+  }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+            let txt_name = document.getElementById('txt_name');
+            $(document).ready(function () {
+                $('#tablepro').DataTable();
+
+            });
+           
+           
+
+            </script>

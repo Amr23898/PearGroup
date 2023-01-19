@@ -1,0 +1,109 @@
+﻿@model TaskPearGroup.ViewModel.SupplierVM;
+@{
+    ViewData["Title"] = "GetAllSupplier";
+}
+
+<section id="addnewsupplier">
+  <div class="form-control bg-primary" id="divadd">
+      <form method="post">
+         <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">Supplier Name</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter your name." asp-for="SupplierName">
+             <span asp-validation-for="SupplierName" class="text-danger"></span>
+                 </div>
+         <div class="col-sm-6 form-group ">
+               <button id="btn-add"  asp-action="AddNewSupplier" type="submit" class="btn btn-light offset-5 mt-4 mb-3">
+                Add Supplier
+            </button>
+             </div>
+        </div>
+     </form>
+  </div>
+  </section>
+ <br />
+
+<section class="bg-primary">
+     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet"/>
+           <div class="row m-1" >
+          <div class="col-md-12" style="margin-top:15px ;">
+            <table class="display table bg-white col-md-12"id="tablesup">
+                <thead>
+                    <tr>
+                      <td class="col-3">Supplier Id</td>
+                     <td class="col-6">Supplier Name</td>      
+                     <td class="col-3"></td>                    
+
+                    </tr>
+                </thead>
+                <tbody id="tabody">
+                    @foreach (var item in ViewBag.Suppliers)
+                    {
+                            <tr>
+                                 <td class="col-3">@item.SupplierId</td>
+                             <td class="col-6">@item.SupplierName</td>
+                             <td class="col-3">
+                      
+                                @Html.ActionLink("Edite", "EditeSupplier", new {Id=item.SupplierId},new{@class="btn btn-primary"})|
+                                          <a class="btn btn-danger" asp-controller="Supplier"  asp-action="DeleteSupplier" asp-route-Id="@item.SupplierId"  onclick="return confirm('Are you sur delete @item.SupplierName')">Delete</a>
+@*                                @Html.ActionLink("Delete", "DeleteSupplier", new {Id=item.SupplierId},new{@class="btn btn-danger"})
+*@
+
+                              
+                             </td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+</section>
+@section Scripts{
+                          <script src="~/lib/jquery/dist/jquery.js"></script>
+                          <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+                         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+                        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+  }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+        let txt_name = document.getElementById('txt_name');
+        $(document).ready(function () {
+            $('#tablesup').DataTable();
+            //$('#btn-edite').hide();
+            //    $('#divedite').hide();
+
+        });
+        //function Edite(ID) {
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/Supplier/EditeSupplier",
+        //        data: { "id": ID },
+        //        success: function (data) {
+        //                txt_name.value=data.SupplierName;
+        //            console.log(data.SupplierName)
+        //            $(document).ready(function () {
+        //                $('#btn_add').hide();
+        //                $('#btn-edite').show();
+        //            });
+
+        //        }
+        //    });      
+        //}
+
+        //function Deleted(id) {
+        //    alert('Are You Sure Deleted?')
+        //         $.ajax({
+        //           type: "Delete",
+        //           url: `/Supplier/DeleteSupplier`,
+        //           data: { "Id": id },
+        //            success: function (data) {
+        //    $('#tablesup').DataTable().ajax.reload();
+
+        //            }
+        //        });
+        //}
+
+
+        </script>

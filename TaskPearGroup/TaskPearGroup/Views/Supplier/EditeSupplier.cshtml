@@ -1,0 +1,28 @@
+﻿@model TaskPearGroup.ViewModel.SupplierVM;
+@{
+    ViewData["Title"] = "EditeSupplier";
+}
+
+<h1>EditeSupplier</h1>
+
+ <div class="form-control bg-primary">
+      <form method="post" >
+         <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">Supplier Name</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter your name." asp-for="SupplierName">
+             <span asp-validation-for="SupplierName" class="text-danger"></span>
+                 </div>
+                <div class="col-sm-6 form-group ">
+               <button asp-action="EditeSupplierindata" type="submit"  class="btn btn-light offset-5 mt-4 mb-3" asp-route-id="@Model.SupplierId">
+                Edite Supplier
+            </button>
+             </div>
+        </div>
+     </form>
+  </div>
+@section Scripts{
+                              <script src="~/lib/jquery/dist/jquery.js"></script>
+                              <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+                            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+  }

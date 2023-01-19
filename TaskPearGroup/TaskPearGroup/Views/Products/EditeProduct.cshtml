@@ -1,0 +1,66 @@
+﻿@model TaskPearGroup.ViewModel.ProductVm;
+@{
+    ViewData["Title"] = "EditeProduct";
+    SelectList list1 = new SelectList(ViewBag.AppSuppliers, "SupplierId", "SupplierName");
+
+}
+
+<h1>EditeProduct</h1>
+
+ <div class="form-control bg-primary" id="divadd">
+      <form method="post">
+         <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">ProductName</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter Product Name" asp-for="ProductName">
+             <span asp-validation-for="ProductName" class="text-danger"></span>
+             </div>
+              <div class="col-sm-6 form-group ">
+            <label for="name-f">QauantityPerUnit</label>
+            <input type="number" class="form-control"   id="txt_name" placeholder="Enter QauantityPerUnit." asp-for="QauantityPerUnit">
+             <span asp-validation-for="QauantityPerUnit" class="text-danger"></span>
+             </div>
+        </div>
+          <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">ReorderLevel</label>
+            <input type="number" class="form-control"   id="txt_name" placeholder="Enter ReorderLevel." asp-for="ReorderLevel">
+             <span asp-validation-for="ReorderLevel" class="text-danger"></span>
+             </div>
+              <div class="col-sm-6 form-group ">
+            <label for="name-f">UnitPrice</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter Price." asp-for="UnitPrice">
+             <span asp-validation-for="UnitPrice" class="text-danger"></span>
+             </div>
+        </div>
+           <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label for="name-f">UnitsInStock</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter UnitsInStock." asp-for="UnitsInStock">
+             <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+             </div>
+              <div class="col-sm-6 form-group ">
+            <label for="name-f">UnitsOnOrder</label>
+            <input type="text" class="form-control"   id="txt_name" placeholder="Enter UnitsOnOrder." asp-for="UnitsOnOrder">
+             <span asp-validation-for="UnitsOnOrder" class="text-danger"></span>
+             </div>
+        </div>
+         <div class="row" >	
+             <div class="col-sm-6 form-group ">
+            <label>Supplier Name</label>
+          <div class="col-sm-6">
+                  <select name="SupplierId" asp-items="list1">
+                  <option value="@Model.SupplierId">--Select Supplier--</option>
+                    </select>
+          </div>
+             <span asp-validation-for="SupplierId" class="text-danger"></span>
+             </div>
+            <div class="col-sm-6 form-group ">
+               <button  asp-action="EditeProductindata" asp-route-id="@Model.ProductId" type="submit" class="btn btn-light offset-5 mt-4 mb-3">
+                Edite Product
+            </button>
+             </div>
+        </div>
+
+     </form>
+  </div>
